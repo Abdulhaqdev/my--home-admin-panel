@@ -1,4 +1,4 @@
-import ApiService from './ApiService'
+import ApiService from './Apiservice'
 
 class HttpClient {
 	async get(url, headers = {}) {
