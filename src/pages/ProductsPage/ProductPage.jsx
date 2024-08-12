@@ -56,8 +56,7 @@ function ProductsPage() {
 		if (action === 'Удалить' && selectedProductId !== null) {
 			deleteProduct(selectedProductId)
 		}
-		console.log(`${action} product with ID: ${selectedProductId}`)
-		setShowModal(false) // Modalni yopamiz
+		setShowModal(false)
 	}
 
 	return (

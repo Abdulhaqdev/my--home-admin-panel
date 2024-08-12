@@ -2,7 +2,7 @@ import { TbUserHexagon } from 'react-icons/tb'
 
 const SettingsPage = () => {
 	return (
-		<div className='bg-gray-100 w-screen min-h-screen ml-48 lg:ml-64 py-8 px-6'>
+		<div className='bg-gray-100  min-h-screen ml-48 lg:ml-64 py-8 px-6'>
 			<div className='rounded-2xl bg-white w-full'>
 				<div className='w-full h-14 rounded-t-2xl bg-violet-800 flex items-center p-6'>
 					<h2 className='text-white text-2xl'>Пост</h2>

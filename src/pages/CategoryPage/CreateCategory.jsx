@@ -24,7 +24,8 @@ function CreateCategory() {
 					'Content-Type': 'multipart/form-data',
 				},
 			})
-			toast.success(response.data.message)
+			console.log(response)
+			toast.success(response.message)
 			setTitle('')
 			setPhoto(null)
 		} catch (error) {

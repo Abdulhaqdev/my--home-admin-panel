@@ -4,16 +4,20 @@ import SearchInput from '../../components/SearchInput'
 import { useNavigate } from 'react-router-dom'
 import HttpClient from '../../service/HttpClient'
 import { API_ENDPOINTS } from '../../service/ApiEndPoints'
+import Modal from '../../components/Dropdown' // Import Modal component
 import appConfig from '../../config/appconfig'
 
 const UserPage = () => {
 	const [users, setUsers] = useState([])
-	console.log(appConfig.token)
+	const [showModal, setShowModal] = useState(false)
+	const [selectedUser, setSelectedUser] = useState(null)
+	const navigate = useNavigate()
+
 	const getUser = async () => {
 		try {
 			const response = await HttpClient.get(API_ENDPOINTS.USERS, {
 				headers: {
-					Authorization: `Bearer ${appConfig.token}`, // Bu yerda token to'g'ri ekanligini tekshiring
+					Authorization: `Bearer ${appConfig.token}`,
 				},
 			})
 			setUsers(response.data.data)
@@ -22,16 +26,13 @@ const UserPage = () => {
 		}
 	}
 
-	const navigate = useNavigate()
-	const [showModal, setShowModal] = useState(false)
-	const [selectedUser, setSelectedUser] = useState(null)
 	const handleUserClick = userId => {
 		navigate(`/user/${userId}`)
 	}
 
 	const handleDotsClick = userId => {
 		setSelectedUser(userId)
-		setShowModal(!showModal)
+		setShowModal(true)
 	}
 
 	const handleOptionClick = action => {
@@ -128,6 +129,13 @@ const UserPage = () => {
 											<span className='h-1.5  w-1.5 bg-slate-400 rounded-full'></span>
 											<span className='h-1.5 w-1.5 bg-slate-400 rounded-full cursor-pointer'></span>
 										</div>
+										{showModal && selectedUser === user.id && (
+											<Modal
+												showModal={true}
+												onClose={() => setShowModal(false)}
+												onAction={handleOptionClick}
+											/>
+										)}
 									</td>
 								</tr>
 							))}
@@ -136,8 +144,7 @@ const UserPage = () => {
 				</div>
 				<div className='flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between'>
 					<span className='text-xs text-gray-600 sm:text-sm'>
-						{' '}
-						Showing 1 to 5 of {users.length} Entries{' '}
+						Showing 1 to 5 of {users.length} Entries
 					</span>
 					<div className='mt-2 inline-flex sm:mt-0'>
 						<button className='mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100'>

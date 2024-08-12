@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 function Modal({ showModal, onClose, onAction }) {
 	if (!showModal) return null
@@ -40,6 +40,13 @@ function Modal({ showModal, onClose, onAction }) {
 			</div>
 		</div>
 	)
+}
+
+// PropTypes ni qo'shish
+Modal.propTypes = {
+	showModal: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
+	onAction: PropTypes.func.isRequired,
 }
 
 export default Modal

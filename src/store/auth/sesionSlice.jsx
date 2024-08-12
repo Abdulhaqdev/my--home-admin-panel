@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const accessToken = localStorage.getItem('accessToken') // 'accesToken' dan 'accessToken' ga o'zgartirildi
+const accessToken = localStorage.getItem('accessToken')
 const initialState = {
 	token: accessToken || '',
 	signIn: accessToken ? true : false,

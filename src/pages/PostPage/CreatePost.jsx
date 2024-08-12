@@ -32,7 +32,7 @@ function CreatePost() {
 				},
 			})
 
-			toast.success(response.message) // Javobning to'g'ri maydonini olish
+			toast.success(response.message)
 			setTitle('')
 			setVideoLink('')
 			setDescription('')

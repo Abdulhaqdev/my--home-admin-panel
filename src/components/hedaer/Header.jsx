@@ -5,14 +5,24 @@ import { Link, useLocation } from 'react-router-dom'
 import notification from '../../assets/002-notification-1.png'
 import { protectedRoutes } from '../../config/routes'
 import SearchInput from '../SearchInput'
+import { useDispatch } from 'react-redux'
+import { setSignOutSuccess } from '../../store/auth/sesionSlice'
 
 const Header = () => {
 	const location = useLocation()
+	const dispatch = useDispatch()
 
 	const currentRoute = protectedRoutes.find(
 		route => route.path === location.pathname
 	)
 	const pageTitle = currentRoute ? currentRoute.key : ''
+
+	const handleLogout = () => {
+		// Logout funksiyasi: bu yerda foydalanuvchini tizimdan chiqarish logikasini joylashtiring
+		// Masalan, tokenni localStorage dan olib tashlash yoki autentifikatsiya holatini yangilash
+		// Logoutdan keyin foydalanuvchini login sahifasiga yo'naltirish
+		dispatch(setSignOutSuccess())
+	}
 
 	return (
 		<div className='overflow-hidden'>
@@ -46,17 +56,13 @@ const Header = () => {
 							<RiSettings5Fill className='text-2xl' />
 							<span>Setting</span>
 						</Link>
-						<Link
-							to='/logout'
-							className={`px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group hover:bg-gray-100 hover:text-blue-600 ${
-								location.pathname === '/logout'
-									? 'bg-gray-100 text-blue-600'
-									: ''
-							}`}
+						<button
+							onClick={handleLogout}
+							className='px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group hover:bg-gray-100 hover:text-blue-600'
 						>
 							<HiOutlineLogout className='text-2xl' />
 							<span>Logout</span>
-						</Link>
+						</button>
 					</div>
 				</div>
 			</div>

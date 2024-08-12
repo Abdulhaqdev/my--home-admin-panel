@@ -23,7 +23,6 @@ function PostPage() {
 			console.error(error)
 		}
 	}
-	console.log(post)
 
 	useEffect(() => {
 		getPost()
@@ -31,7 +30,7 @@ function PostPage() {
 
 	const handleDotsClick = postId => {
 		setSelectedPostId(postId)
-		setShowModal(postId)
+		setShowModal(true)
 	}
 
 	const deletePost = async id => {
@@ -52,7 +51,6 @@ function PostPage() {
 		if (action === 'Удалить' && selectedPostId !== null) {
 			deletePost(selectedPostId)
 		}
-		console.log(`${action} post with ID: ${selectedPostId}`)
 		setShowModal(false)
 	}
 
@@ -94,11 +92,11 @@ function PostPage() {
 										<span className='h-1.5 w-1.5 bg-slate-400 rounded-full'></span>
 										<span className='h-1.5 w-1.5 bg-slate-400 rounded-full'></span>
 
-										{showModal === item.id && (
+										{showModal && selectedPostId === item.id && (
 											<Modal
 												showModal={true}
-												onClose={() => setShowModal(false)}
 												onAction={handleOptionClick}
+												onClose={() => setShowModal(false)}
 											/>
 										)}
 									</div>
